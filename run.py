@@ -4,12 +4,12 @@ from flask import Flask, request
 from webexteamssdk import WebexTeamsAPI
 
 if not "WEBEX_TEAMS_ACCESS_TOKEN" in os.environ:
-    webexAPI = WebexTeamsAPI(access_token='CHANGEME')
+    webexAPI = WebexTeamsAPI(access_token='ODdjNjQzZTgtNjIzYy00ZTFjLTk3NjUtZGI3Yzg3NzBlMzQxYmU2MzY2OGUtMzZk_PF84_1eb65fdf-9643-417f-9974-ad72cae0e10f')
 else:
     webexAPI = WebexTeamsAPI()
 
 if not "WEBEX_TEAMS_ROOM_ID" in os.environ:
-    os.environ["WEBEX_TEAMS_ROOM_ID"] = "CHANGEME"
+    os.environ["WEBEX_TEAMS_ROOM_ID"] = "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY1MGUyOGQwLTFjZWUtNDAwOS1hNjgwLTczN2U4M2FlMjYwYg"
     webexRoomId = os.environ["WEBEX_TEAMS_ROOM_ID"]
 else:
     webexRoomId = os.environ["WEBEX_TEAMS_ROOM_ID"]
@@ -19,7 +19,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def mainPage():
     print(os.environ)
-    return("cisco-dnac-platform-webex-notifications -> by Robert Csapo (robert@nigma.org)")
+    return("SPITZEcisco-dnac-platform-webex-notifications -> by Robert Csapo (robert@nigma.org)")
 
 @app.route('/sample', methods=['GET'])
 def sample():
