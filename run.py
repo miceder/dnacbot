@@ -19,7 +19,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def mainPage():
     print(os.environ)
-    return("SPITZEcisco-dnac-platform-webex-notifications -> by Robert Csapo (robert@nigma.org)")
+    return("Thats my Bot now")
 
 @app.route('/sample', methods=['GET'])
 def sample():
