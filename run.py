@@ -3,23 +3,20 @@ import os
 from flask import Flask, request
 from webexteamssdk import WebexTeamsAPI
 
-if not "WEBEX_TEAMS_ACCESS_TOKEN" in os.environ:
-    webexAPI = WebexTeamsAPI(access_token='CHANGEME')
-else:
-    webexAPI = WebexTeamsAPI()
 
-if not "WEBEX_TEAMS_ROOM_ID" in os.environ:
-    os.environ["WEBEX_TEAMS_ROOM_ID"] = "CHANGEME"
-    webexRoomId = os.environ["WEBEX_TEAMS_ROOM_ID"]
-else:
-    webexRoomId = os.environ["WEBEX_TEAMS_ROOM_ID"]
+WEBEX_TEAMS_ACCESS_TOKEN = 'TOKEN HERE'
+webexAPI = WebexTeamsAPI(WEBEX_TEAMS_ACCESS_TOKEN)
+
+
+##Network Issues Space CBC
+webexRoomId = "ROOMID HERE"
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def mainPage():
     print(os.environ)
-    return("Thats my Bot now")
+    return("I am your DNAC BOT")
 
 @app.route('/sample', methods=['GET'])
 def sample():
@@ -33,7 +30,8 @@ def sample():
         issueSeverity = item["issueSeverity"]
         issueSummary = item["issueSummary"]
     data = "Warning %s (%s)! %s - %s" % (issueSeverity, issuePriority, issueTitle, issueSummary)
-    webex(str(data))
+
+
     return("Sample data from -> %s" % jsonFile)
 
 @app.route('/postsample', methods=['POST'])
@@ -52,10 +50,12 @@ def postSample():
 def webex(*data):
     if not len(data) == 0:
         data = data[0]
+
         webexAPI.messages.create(webexRoomId, text=data)
     else:
         webexAPI.messages.create(webexRoomId, text="Sample connection!")
     return("Sample Webex Teams Message")
+
 
 @app.route('/dnac', methods=['POST'])
 def dnacPayload():
@@ -74,4 +74,4 @@ def dnacPayload():
         return("Connection Alive")
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=443,threaded=True,debug=False,ssl_context='adhoc')
+    app.run(host="0.0.0.0",port=5000,threaded=True,debug=False,ssl_context='adhoc')
